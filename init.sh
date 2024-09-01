@@ -8,6 +8,7 @@ mv -f ./sshd_config /etc/ssh/sshd_config
 mv -f ./user.rules /etc/ufw/user.rules
 mv -f ./user6.rules /etc/ufw/user6.rules
 mv -f ./sysctl.conf /etc/ufw/sysctl.conf
+mv -f ./before6.rules /etc/ufw/before6.rules
 ufw disable
 ufw enable
 ufw reload
