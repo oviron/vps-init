@@ -17,9 +17,6 @@
 :ufw-user-limit-accept - [0:0]
 ### RULES ###
 
-### tuple ### allow udp 1194 0.0.0.0/0 any 0.0.0.0/0 in
--A ufw-user-input -p udp --dport 1194 -j ACCEPT
-
 ### tuple ### allow tcp 22 0.0.0.0/0 any 0.0.0.0/0 OpenSSH - in
 -A ufw-user-input -p tcp --dport 22 -j ACCEPT -m comment --comment 'dapp_OpenSSH'
 
@@ -27,14 +24,19 @@
 -A ufw-user-input -p tcp --dport 22022 -j ACCEPT
 -A ufw-user-input -p udp --dport 22022 -j ACCEPT
 
-### tuple ### allow any 1095 0.0.0.0/0 any 0.0.0.0/0 in
--A ufw-user-input -p tcp --dport 1095 -j ACCEPT
--A ufw-user-input -p udp --dport 1095 -j ACCEPT
+### tuple ### allow any 80 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 80 -j ACCEPT
+-A ufw-user-input -p udp --dport 80 -j ACCEPT
+
+### tuple ### allow any 443 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p tcp --dport 443 -j ACCEPT
+-A ufw-user-input -p udp --dport 443 -j ACCEPT
 
 ### END RULES ###
 
 ### LOGGING ###
 -A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
 -I ufw-logging-deny -m conntrack --ctstate INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
 -A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
 -A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
