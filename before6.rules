@@ -1,4 +1,3 @@
-sudo cat /etc/ufw/before6.rules
 #
 # rules.before
 #
