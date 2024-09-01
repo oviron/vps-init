@@ -11,4 +11,4 @@ mv -f ./sysctl.conf /etc/ufw/sysctl.conf
 ufw disable
 ufw enable
 ufw reload
-service ssh restart
+reboot
